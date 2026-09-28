@@ -2,6 +2,18 @@
 
 Chatbot web con interfaccia Streamlit, cronologia della conversazione e system prompt configurabile.
 
+```mermaid
+sequenceDiagram
+    participant Tu
+    participant App as App web (browser)
+    participant AI as Generative Engine
+    Tu->>App: scrivi un messaggio
+    App->>AI: messaggio + tutta la cronologia
+    AI-->>App: risposta
+    App-->>Tu: risposta
+    Note over App: ricorda ogni messaggio della sessione
+```
+
 ---
 
 ## Cosa fa
