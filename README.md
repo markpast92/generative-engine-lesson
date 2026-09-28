@@ -58,10 +58,10 @@ cd generative-engine-lesson
 git branch -a
 
 # Passare a un branch specifico
-git checkout simple-call
-git checkout simple-chatbot
-git checkout chatbot-with-doc-upload
-git checkout agent-with-tools
+git checkout 0-simple-call
+git checkout 1-simple-chatbot
+git checkout 2-chatbot-with-doc-upload
+git checkout 3-agent-with-tools
 ```
 
 ## Setup iniziale (per ogni branch)
@@ -82,8 +82,8 @@ Poi installa le dipendenze e avvia l'app:
 
 ```bash
 uv sync
-streamlit run app.py   # per tutti i branch tranne simple-call
-python main.py         # solo per il branch "simple-call"
+streamlit run app.py   # per tutti i branch tranne 0-simple-call
+python main.py         # solo per il branch "0-simple-call"
 ```
 
 ---
@@ -92,17 +92,17 @@ python main.py         # solo per il branch "simple-call"
 
 | Branch | Descrizione |
 |---|---|
-| `simple-call` | Prima chiamata all'API - script Python minimale |
-| `simple-chatbot` | Chatbot Streamlit con cronologia della conversazione |
-| `chatbot-with-doc-upload` | Chatbot + upload PDF/Word/Excel come knowledge base |
-| `agent-with-tools` | Agente con tool calling e generazione documenti |
+| `0-simple-call` | Prima chiamata all'API - script Python minimale |
+| `1-simple-chatbot` | Chatbot Streamlit con cronologia della conversazione |
+| `2-chatbot-with-doc-upload` | Chatbot + upload PDF/Word/Excel come knowledge base |
+| `3-agent-with-tools` | Agente con tool calling e generazione documenti |
 | `live-lesson` | Punto di partenza vuoto per la lezione live |
 
 ```mermaid
 flowchart LR
-    A["🔌 Step 1\nsimple-call\nPrima chiamata API"] --> B["💬 Step 2\nsimple-chatbot\nChatbot web"]
-    B --> C["📄 Step 3\nchatbot-with-doc-upload\nUpload documenti"]
-    C --> D["🤖 Step 4\nagent-with-tools\nAgente"]
+    A["🔌 0-simple-call\nPrima chiamata API"] --> B["💬 1-simple-chatbot\nChatbot web"]
+    B --> C["📄 2-chatbot-with-doc-upload\nUpload documenti"]
+    C --> D["🤖 3-agent-with-tools\nAgente"]
 ```
 
 ---
@@ -118,7 +118,7 @@ Il modo di usarli: vai su [agenti di generative engine](https://generative.engin
 ### Prompt 0 — Prima chiamata API
 
 **File:** [`prompt_0.md`](prompt_0.md)  
-**Branch di riferimento:** `simple-call`
+**Branch di riferimento:** `0-simple-call`
 
 Genera uno script Python minimale (`main.py`) che si connette al Generative Engine di Capgemini, invia un messaggio e stampa la risposta in console.
 
@@ -139,7 +139,7 @@ sequenceDiagram
 ### Prompt 1 — Chatbot Streamlit
 
 **File:** [`prompt_1.md`](prompt_1.md)  
-**Branch di riferimento:** `simple-chatbot`
+**Branch di riferimento:** `1-simple-chatbot`
 
 Trasforma la chiamata API in un chatbot Streamlit completo con interfaccia web, cronologia della conversazione e system prompt configurabile.
 
@@ -164,7 +164,7 @@ sequenceDiagram
 ### Prompt 2 — Upload documenti
 
 **File:** [`prompt_2.md`](prompt_2.md)  
-**Branch di riferimento:** `chatbot-with-doc-upload`
+**Branch di riferimento:** `2-chatbot-with-doc-upload`
 
 Aggiunge al chatbot la possibilità di caricare file PDF, Word ed Excel come knowledge base. Il modello legge i documenti caricati e risponde in base al loro contenuto.
 
@@ -190,7 +190,7 @@ sequenceDiagram
 ### Prompt 3 — Agente con tool calling
 
 **File:** [`prompt_3.md`](prompt_3.md)  
-**Branch di riferimento:** `agent-with-tools`
+**Branch di riferimento:** `3-agent-with-tools`
 
 Trasforma il chatbot in un **agente** capace di ragionare in più iterazioni, chiamare tool e generare documenti PDF, Word ed Excel scaricabili direttamente dall'interfaccia.
 
@@ -214,7 +214,7 @@ sequenceDiagram
 
 ---
 
-## Esempio di domande da fare all'agente (branch `agent-with-tools`)
+## Esempio di domande da fare all'agente (branch `3-agent-with-tools`)
 
 - "Crea un documento Word con un piano d'azione per il prossimo trimestre"
 - "Genera un foglio Excel con le spese mensili per i prossimi 6 mesi"
