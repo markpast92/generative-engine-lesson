@@ -2,6 +2,14 @@
 
 Script Python minimale che mostra come connettersi al Generative Engine di Capgemini, inviare un messaggio e ricevere una risposta.
 
+```mermaid
+sequenceDiagram
+    participant Tu
+    participant AI as Generative Engine
+    Tu->>AI: "Ciao, presentati in una frase"
+    AI-->>Tu: "Ciao! Sono Nova..."
+```
+
 ---
 
 ## Cosa fa
