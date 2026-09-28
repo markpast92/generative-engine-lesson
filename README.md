@@ -98,6 +98,13 @@ python main.py         # solo per il branch "simple-call"
 | `agent-with-tools` | Agente con tool calling e generazione documenti |
 | `live-lesson` | Punto di partenza vuoto per la lezione live |
 
+```mermaid
+flowchart LR
+    A["🔌 Step 1\nsimple-call\nPrima chiamata API"] --> B["💬 Step 2\nsimple-chatbot\nChatbot web"]
+    B --> C["📄 Step 3\nchatbot-with-doc-upload\nUpload documenti"]
+    C --> D["🤖 Step 4\nagent-with-tools\nAgente"]
+```
+
 ---
 
 ## I Prompt
@@ -115,6 +122,14 @@ Il modo di usarli: vai su [agenti di generative engine](https://generative.engin
 
 Genera uno script Python minimale (`main.py`) che si connette al Generative Engine di Capgemini, invia un messaggio e stampa la risposta in console.
 
+```mermaid
+sequenceDiagram
+    participant Tu
+    participant AI as Generative Engine
+    Tu->>AI: "Ciao, presentati in una frase"
+    AI-->>Tu: "Ciao! Sono Nova..."
+```
+
 **Come si usa:** incolla il contenuto di `prompt_0.md` in un LLM.
 
 **File generati:** `main.py`
@@ -127,6 +142,18 @@ Genera uno script Python minimale (`main.py`) che si connette al Generative Engi
 **Branch di riferimento:** `simple-chatbot`
 
 Trasforma la chiamata API in un chatbot Streamlit completo con interfaccia web, cronologia della conversazione e system prompt configurabile.
+
+```mermaid
+sequenceDiagram
+    participant Tu
+    participant App as App web (browser)
+    participant AI as Generative Engine
+    Tu->>App: scrivi un messaggio
+    App->>AI: messaggio + tutta la cronologia
+    AI-->>App: risposta
+    App-->>Tu: risposta
+    Note over App: ricorda ogni messaggio della sessione
+```
 
 **Come si usa:** incolla il contenuto di `prompt_1.md` in un LLM, sostituendo il placeholder `[inserire il main di April]` con il contenuto del `main.py` generato nel passo precedente.
 
@@ -141,6 +168,19 @@ Trasforma la chiamata API in un chatbot Streamlit completo con interfaccia web, 
 
 Aggiunge al chatbot la possibilità di caricare file PDF, Word ed Excel come knowledge base. Il modello legge i documenti caricati e risponde in base al loro contenuto.
 
+```mermaid
+sequenceDiagram
+    participant Tu
+    participant App as App web (browser)
+    participant AI as Generative Engine
+    Tu->>App: carica PDF / Word / Excel
+    Note over App: estrae il testo dal documento
+    Tu->>App: fai una domanda
+    App->>AI: domanda + contenuto del documento
+    AI-->>App: risposta basata sul documento
+    App-->>Tu: risposta
+```
+
 **Come si usa:** incolla il contenuto di `prompt_2.md` in un LLM, sostituendo il placeholder con i tre file (`app.py`, `config.py`, `engine.py`) generati nel passo precedente.
 
 **File generati:** `app.py`, `config.py`, `engine.py`, `extractor.py`
@@ -153,6 +193,20 @@ Aggiunge al chatbot la possibilità di caricare file PDF, Word ed Excel come kno
 **Branch di riferimento:** `agent-with-tools`
 
 Trasforma il chatbot in un **agente** capace di ragionare in più iterazioni, chiamare tool e generare documenti PDF, Word ed Excel scaricabili direttamente dall'interfaccia.
+
+```mermaid
+sequenceDiagram
+    participant Tu
+    participant App as App web (browser)
+    participant AI as Generative Engine
+    Tu->>App: "crea un documento Word"
+    App->>AI: richiesta
+    AI-->>App: usa il tool create_document
+    Note over App: genera il file in memoria
+    App->>AI: documento creato ✓
+    AI-->>App: risposta finale
+    App-->>Tu: testo + pulsante download
+```
 
 **Come si usa:** incolla il contenuto di `prompt_3.md` in un LLM, sostituendo il placeholder con i quattro file (`app.py`, `config.py`, `engine.py`, `extractor.py`) generati nel passo precedente.
 
