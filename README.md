@@ -52,4 +52,4 @@ config.py     # (assente in questo step, tutto in main.py)
 
 Generato con `prompt_0.md` — disponibile nel branch `main`.
 
-Per vedere il passo successivo: `git checkout simple-chatbot`
+Per vedere il passo successivo: `git checkout 1-simple-chatbot`
