@@ -62,6 +62,6 @@ extractor.py    # estrazione testo da PDF, DOCX, XLSX
 ## Come è stato creato
 
 Generato con `prompt_2.md` — disponibile nel branch `main`.  
-Punto di partenza: codice di `simple-chatbot`.
+Punto di partenza: codice di `1-simple-chatbot`.
 
-Per vedere il passo successivo: `git checkout agent-with-tools`
+Per vedere il passo successivo: `git checkout 3-agent-with-tools`
