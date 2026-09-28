@@ -8,9 +8,39 @@ Il codice è suddiviso in branch che rappresentano gli step progressivi della le
 
 ## Prerequisiti
 
-- [uv](https://docs.astral.sh/uv/) installato (`pip install uv` oppure segui la [documentazione ufficiale](https://docs.astral.sh/uv/getting-started/installation/))
-- Python 3.14 (uv lo installa automaticamente)
-- Una API key del Generative Engine di Capgemini
+---
+
+# Parte 1 — Gli strumenti: VS Code e uv
+
+## 1.1 VS Code
+**VS Code** (Visual Studio Code) è l'editor dove scriviamo ed eseguiamo il codice. È gratis.
+- Scaricalo da *portale aziendale* e installalo.
+- Apri VS Code → menu **File → Apri cartella…** e scegli la cartella del tuo progetto.
+- Installa l'estensione **Python** (icona dei quadratini a sinistra → cerca "Python").
+
+## 1.2 uv — cos'è e perché
+**uv** è lo strumento che:
+- crea il progetto,
+- installa le librerie (i "mattoncini" già pronti),
+- avvia i programmi con le librerie giuste.
+
+Pensa a uv come al "gestore" del progetto: gli dici *cosa ti serve* e lui si occupa del resto, sempre allo stesso modo su ogni computer (= **riproducibile**).
+
+### Installare uv (Windows)
+Apri il **PowerShell** (cercalo nel menu Start) e incolla:
+```powershell
+irm https://astral.sh/uv/install.ps1 | iex
+```
+Chiudi e riapri il terminale, poi verifica con `uv --version`.
+
+### I 4 comandi che useremo (nel terminale di VS Code)
+| Comando | Cosa fa |
+|---|---|
+| `uv init` | Crea un nuovo progetto nella cartella corrente |
+| `uv add openai streamlit python-dotenv` | Aggiunge le librerie che ci servono |
+| `uv sync` | Reinstalla tutte le librerie (utile se scarichi un progetto già fatto) |
+
+> Il terminale in VS Code si apre da: menu **Terminale → Nuovo terminale**.
 
 ---
 
@@ -42,12 +72,18 @@ Crea un file `.env` nella cartella del progetto con la tua chiave API:
 GEN_ENGINE_API_KEY=la-tua-chiave-api
 ```
 
+La tua chiave si trova nel portale aziendale del Generative Engine di Capgemini.
+
+https://generative.engine.capgemini.com/
+
+Nella sezione studio -> My API Keys and Usage
+
 Poi installa le dipendenze e avvia l'app:
 
 ```bash
 uv sync
-uv run streamlit run app.py   # per tutti i branch tranne simple-call
-uv run python main.py         # solo per simple-call
+streamlit run app.py   # per tutti i branch tranne simple-call
+python main.py         # solo per il branch "simple-call"
 ```
 
 ---
@@ -56,7 +92,7 @@ uv run python main.py         # solo per simple-call
 
 | Branch | Descrizione |
 |---|---|
-| `simple-call` | Prima chiamata all'API — script Python minimale |
+| `simple-call` | Prima chiamata all'API - script Python minimale |
 | `simple-chatbot` | Chatbot Streamlit con cronologia della conversazione |
 | `chatbot-with-doc-upload` | Chatbot + upload PDF/Word/Excel come knowledge base |
 | `agent-with-tools` | Agente con tool calling e generazione documenti |
@@ -66,9 +102,9 @@ uv run python main.py         # solo per simple-call
 
 ## I Prompt
 
-Ogni step della lezione è definito da un prompt da incollare in un LLM (es. Claude, ChatGPT). I prompt sono progettati per un linguaggio semplice e funzionano anche con modelli meno capaci.
+Ogni step della lezione è definito da un prompt da incollare in un LLM (es. Agenti di Generative Engine, Copilot, ecc). I prompt sono progettati per un linguaggio semplice e funzionano anche con modelli meno capaci.
 
-Il modo di usarli: vai su [claude.ai](https://claude.ai) o il tuo LLM preferito, incolla il contenuto del prompt e ottieni i file completi pronti all'uso.
+Il modo di usarli: vai su [agenti di generative engine](https://generative.engine.capgemini.com/agents) o il tuo LLM preferito, incolla il contenuto del prompt e ottieni i file completi pronti all'uso.
 
 ---
 
