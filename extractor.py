@@ -1,51 +1,35 @@
-import PyPDF2
+"""Extract plain text from PDF, Word (.docx) and Excel (.xlsx) files."""
+
 import docx
-import openpyxl
-from io import BytesIO
+import pandas as pd
+from pypdf import PdfReader
 
-def extract_from_pdf(file_bytes):
-    """Estrae testo da PDF."""
-    try:
-        pdf_reader = PyPDF2.PdfReader(BytesIO(file_bytes))
-        text = ""
-        for page in pdf_reader.pages:
-            text += page.extract_text() + "\n"
-        return text.strip()
-    except Exception as e:
-        return f"Errore nell'estrazione PDF: {str(e)}"
 
-def extract_from_docx(file_bytes):
-    """Estrae testo da DOCX."""
-    try:
-        doc = docx.Document(BytesIO(file_bytes))
-        text = "\n".join([paragraph.text for paragraph in doc.paragraphs])
-        return text.strip()
-    except Exception as e:
-        return f"Errore nell'estrazione DOCX: {str(e)}"
+def extract_text(file) -> str:
+    """Dispatch to the right reader based on file extension."""
+    name = file.name.lower()
+    if name.endswith(".pdf"):
+        return _read_pdf(file)
+    if name.endswith(".docx"):
+        return _read_docx(file)
+    if name.endswith((".xlsx", ".xls")):
+        return _read_excel(file)
+    raise ValueError(f"Unsupported file type: {file.name}")
 
-def extract_from_xlsx(file_bytes):
-    """Estrae testo da XLSX."""
-    try:
-        workbook = openpyxl.load_workbook(BytesIO(file_bytes))
-        text = ""
-        for sheet_name in workbook.sheetnames:
-            sheet = workbook[sheet_name]
-            text += f"--- Sheet: {sheet_name} ---\n"
-            for row in sheet.iter_rows(values_only=True):
-                text += " | ".join([str(cell) if cell is not None else "" for cell in row]) + "\n"
-        return text.strip()
-    except Exception as e:
-        return f"Errore nell'estrazione XLSX: {str(e)}"
 
-def extract_text(file_bytes, file_name):
-    """Estrae testo dal file in base all'estensione."""
-    file_extension = file_name.lower().split(".")[-1]
-    
-    if file_extension == "pdf":
-        return extract_from_pdf(file_bytes)
-    elif file_extension == "docx":
-        return extract_from_docx(file_bytes)
-    elif file_extension == "xlsx":
-        return extract_from_xlsx(file_bytes)
-    else:
-        return f"Formato file non supportato: {file_extension}"
+def _read_pdf(file) -> str:
+    reader = PdfReader(file)
+    return "\n".join(page.extract_text() or "" for page in reader.pages)
+
+
+def _read_docx(file) -> str:
+    doc = docx.Document(file)
+    return "\n".join(p.text for p in doc.paragraphs if p.text.strip())
+
+
+def _read_excel(file) -> str:
+    sheets = pd.read_excel(file, sheet_name=None)
+    parts = []
+    for sheet_name, df in sheets.items():
+        parts.append(f"Sheet: {sheet_name}\n{df.to_csv(index=False)}")
+    return "\n\n".join(parts)
