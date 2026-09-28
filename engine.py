@@ -1,10 +1,14 @@
 from config import get_client, MODEL, SYSTEM_PROMPT
 from openai import APITimeoutError, APIConnectionError, APIStatusError
 
-def reply(message, history):
+def reply(message, history, knowledge_base=""):
     client = get_client()
     
-    messages = [{"role": "system", "content": SYSTEM_PROMPT}]
+    system_prompt = SYSTEM_PROMPT
+    if knowledge_base:
+        system_prompt += f"\n\nConosci le seguenti informazioni:\n{knowledge_base}"
+    
+    messages = [{"role": "system", "content": system_prompt}]
     
     for msg in history:
         if msg["role"] in ["user", "assistant"]:
