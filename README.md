@@ -2,6 +2,19 @@
 
 Chatbot Streamlit con la possibilità di caricare file PDF, Word ed Excel come knowledge base. Il modello risponde in base al contenuto dei documenti caricati.
 
+```mermaid
+sequenceDiagram
+    participant Tu
+    participant App as App web (browser)
+    participant AI as Generative Engine
+    Tu->>App: carica PDF / Word / Excel
+    Note over App: estrae il testo dal documento
+    Tu->>App: fai una domanda
+    App->>AI: domanda + contenuto del documento
+    AI-->>App: risposta basata sul documento
+    App-->>Tu: risposta
+```
+
 ---
 
 ## Cosa fa
