@@ -4,7 +4,11 @@ from openai import OpenAI
 
 load_dotenv()
 
-MODEL = "amazon.nova-lite-v1:0"
+# modello semplice, meno costoso ma più impreciso
+# MODEL = "amazon.nova-lite-v1:0"
+
+# modello più complesso, più costoso, ma più preciso
+MODEL = "anthropic.claude-sonnet-4-6"
 
 SYSTEM_PROMPT = """Sei un assistente utile e amichevole. 
 Rispondi in modo chiaro e conciso.
