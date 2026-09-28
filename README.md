@@ -67,4 +67,4 @@ extractor.py    # estrazione testo da PDF/DOCX/XLSX caricati
 ## Come è stato creato
 
 Generato con `prompt_3.md` — disponibile nel branch `main`.  
-Punto di partenza: codice di `chatbot-with-doc-upload`.
+Punto di partenza: codice di `2-chatbot-with-doc-upload`.
