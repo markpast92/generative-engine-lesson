@@ -2,6 +2,20 @@
 
 Assistente agentico completo con ciclo iterativo, tool calling e generazione di documenti PDF, Word ed Excel scaricabili direttamente dall'interfaccia.
 
+```mermaid
+sequenceDiagram
+    participant Tu
+    participant App as App web (browser)
+    participant AI as Generative Engine
+    Tu->>App: "crea un documento Word"
+    App->>AI: richiesta
+    AI-->>App: usa il tool create_document
+    Note over App: genera il file in memoria
+    App->>AI: documento creato ✓
+    AI-->>App: risposta finale
+    App-->>Tu: testo + pulsante download
+```
+
 ---
 
 ## Cosa fa
@@ -47,22 +61,6 @@ extractor.py    # estrazione testo da PDF/DOCX/XLSX caricati
    - "Scrivi una policy in PDF sull'uso degli strumenti AI"
 
 ---
-
-## Architettura del flusso
-
-```
-Utente scrive → app.py chiama reply()
-                   ↓
-             engine.py chiama il modello (iterazione 1)
-                   ↓
-          Il modello usa create_document?
-               Sì → engine emette ("tool", payload)
-                    app.py chiama generator.py
-                    engine.py ri-chiama il modello con il risultato del tool
-               No → engine emette ("done", testo_finale)
-                   ↓
-          app.py mostra la risposta + pulsanti download
-```
 
 ---
 
