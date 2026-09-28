@@ -57,6 +57,6 @@ engine.py     # funzione reply() che chiama il modello
 ## Come è stato creato
 
 Generato con `prompt_1.md` — disponibile nel branch `main`.  
-Punto di partenza: codice di `simple-call`.
+Punto di partenza: codice di `0-simple-call`.
 
-Per vedere il passo successivo: `git checkout chatbot-with-doc-upload`
+Per vedere il passo successivo: `git checkout 2-chatbot-with-doc-upload`
