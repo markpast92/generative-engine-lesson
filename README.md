@@ -4,6 +4,42 @@ Materiale per una lezione pratica su come costruire un chatbot e un agente con i
 
 ---
 
+## Step preliminare — Installazione degli strumenti
+
+✅ Installate **Visual Studio Code** dal **Portale Aziendale → Pre Approved Catalogue**.
+
+Successivamente, aprite il terminale **PowerShell integrato** (**Terminale → Nuovo terminale**) ed eseguite:
+
+### 1️⃣ Python
+
+È sufficiente **Python 3.10 o successivo**. Se lo avete già installato, non serve aggiornarlo. Per una nuova installazione:
+
+```powershell
+winget install --id Python.Python.3.14 --exact
+```
+
+### 2️⃣ Git
+
+```powershell
+winget install --id Git.Git --exact --source winget
+```
+
+### 3️⃣ UV
+
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+Al termine, **chiudete e riaprite Visual Studio Code**, aprite nuovamente il terminale PowerShell integrato e verificate che tutto sia installato correttamente:
+
+```powershell
+python --version
+git --version
+uv --version
+```
+
+---
+
 ## Come usare questo repository
 
 Questo branch (`main`) è il punto di ingresso: contiene i **prompt** da usare durante la lezione e i **documenti di test**.
@@ -19,6 +55,18 @@ git checkout 1-simple-chatbot        # Step 2 — chatbot web
 git checkout 2-chatbot-with-doc-upload  # Step 3 — upload documenti
 git checkout 3-agent-with-tools      # Step 4 — agente con tool calling
 ```
+
+### Verifica automatica dei requisiti base
+
+Dopo il clone, prima di passare ai branch numerati:
+
+1. Aprite [`check_requisites.py`](check_requisites.py) in Visual Studio Code.
+2. Cliccate **▶ Esegui file Python** in alto a destra.
+3. Nel terminale vedrete `[OK]` o `[ERRORE]` per **Python >= 3.10**, **Git** e **UV**.
+
+Se il pulsante ▶ non compare, installate l'estensione **Python di Microsoft** dal pannello Estensioni di VS Code. Se richiesto, selezionate un interprete Python 3.10 o successivo.
+
+Lo script non richiede pacchetti aggiuntivi e non installa né modifica nulla.
 
 Per ogni branch: crea un `.env` con `GEN_ENGINE_API_KEY=la-tua-chiave`, poi `uv sync` e avvia.
 
