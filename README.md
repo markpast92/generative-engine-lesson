@@ -52,7 +52,7 @@ extractor.py    # estrazione testo da PDF, DOCX, XLSX
 
 3. Avvia l'app:
    ```bash
-   uv run streamlit run app.py
+   streamlit run app.py
    ```
 
 4. Carica un documento dalla sidebar e fai domande sul suo contenuto.
