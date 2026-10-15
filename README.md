@@ -47,7 +47,7 @@ engine.py     # funzione reply() che chiama il modello
 
 3. Avvia l'app:
    ```bash
-   uv run streamlit run app.py
+   streamlit run app.py
    ```
 
 4. Apri il browser su `http://localhost:8501`
