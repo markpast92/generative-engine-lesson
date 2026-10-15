@@ -43,7 +43,7 @@ config.py     # (assente in questo step, tutto in main.py)
 
 3. Esegui:
    ```bash
-   uv run python main.py
+   python main.py
    ```
 
 ---
